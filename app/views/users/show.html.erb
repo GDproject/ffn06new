@@ -2,9 +2,9 @@
 <div class="row">
   <aside class="col-md-12">
     <section class="user_info">
-      <h1>
-        <%= @user.user_name %>
-      </h1>
+      <h1><%= @user.user_name %></h1>
+      <p><%= t "bet.your_coin" %><%= @user.coin %></p>
+      <%= link_to t("bet.list_bet"), bets_path %>
     </section>
   </aside>
 </div>

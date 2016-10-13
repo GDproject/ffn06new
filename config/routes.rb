@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "staticpage#index"
+  root "news#index"
 
   get "/new_session", to: "sessions#new"
   post "/new_session", to: "sessions#create"
@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   resources :category_news, only: [:index, :show]
   resources :news, only: [:index, :show]
   resources :matches, only: [:index, :show]
+  resources :bets
   namespace :admin do
     resources :users, :players, :rates, :clubs, :category_news, :scores, :news
-    resources :matches, :category_match_rates
+    resources :matches, :category_match_rates, :bets
   end
   get "admin", to: "admin/welcome#home"
   delete "/delete_admin", to: "admin/users#destroy"

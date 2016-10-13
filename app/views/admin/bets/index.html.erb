@@ -1,0 +1,29 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t"bet.date" %></th>
+      <th><%= t"bet.match_time" %></th>
+      <th colspan="4"><%= t"bet.club" %></th>
+      <th><%= t"bet.home_coin" %></th>
+      <th><%= t"bet.away_coin" %></th>
+      <th><%= t"bet.status" %></th>
+      <th><%= t"bet.user" %></th>
+    </tr>
+  </thead>
+  <% @bets.each do |bet| %>
+  <tbody>
+    <tr>
+      <td><%= bet.created_at.strftime(t"bet.strftime") %></td>
+      <td><%= bet.match.match_time.strftime(t"bet.time")%></td>
+      <td><%= link_to bet.match.home.club_name, club_path(bet.match.home) %></td>
+      <td><%= bet.match.home_goal %></td>
+      <td><%= bet.match.away_goal %></td>
+      <td><%= link_to bet.match.away.club_name, club_path(bet.match.away) %></td>
+      <td><%= bet.home_coin %></td>
+      <td><%= bet.away_coin %></td>
+      <td><%= bet.bet_status? ? t("bet.open"): t("bet.close") %></td>
+      <td><%= bet.user.user_name %>
+    </tr>
+  </tbody>
+  <% end %>
+</table>

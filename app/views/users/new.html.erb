@@ -16,6 +16,8 @@
       <%= f.label :password_confirmation, t("confirmation") %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
 
+      <%= f.hidden_field :coin, :value => Settings.coin %>
+
       <%= f.submit t "create" , class: "btn btn-primary" %>
     <% end %>
   </div>

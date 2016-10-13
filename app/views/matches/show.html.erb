@@ -26,12 +26,13 @@
           <td><%= @match.rate.category_match_rate.category_rates %></td>
         </tr>
         <tr>
-          <td colspan="2"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td colspan="3"></td>
+          <% if logged_in? && @match.match_status?  %>
+            <td colspan="3">
+              <%= link_to t("bet.create_the_bet"), new_bet_path(:match_id => @match.id) %>
+            </td>
+          <% else %>
+            <%= t "bet.can_not_create" %>
+          <% end %>
         </tr>
       </tbody>
     </table>
