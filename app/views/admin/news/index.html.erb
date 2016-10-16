@@ -1,4 +1,7 @@
-<%= link_to t("news.new"), new_admin_news_path %>
+<div class="row" style="margin-bottom:20px; margin-top:20px; float:right;">
+  <%= link_to t("news.new"), new_admin_news_path , class: "btn btn-sm btn-primary btn-create"  %>
+</div>
+<div style="clear:both;"></div>
 <% @news.each do |news| %>
   <div class="article">
     <div class="article-left">

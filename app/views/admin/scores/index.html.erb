@@ -1,11 +1,15 @@
-<%= link_to t("score.new"), new_admin_score_path %>
+
+<div class="row" style="margin-bottom:20px; margin-top:20px; float:right;">
+  <%= link_to t("score.new"), new_admin_score_path , class: "btn btn-sm btn-primary btn-create" %>
+</div>
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-12">
     <table>
       <tr>
         <th><%= t "score.home_score" %></th>
         <th><%= t "score.away_score" %></th>
         <th><%= t "score.rate_score" %></th>
+        <th>Function</th>
       </tr>
       <% @scores.each do |score| %>
         <tr>
@@ -14,8 +18,8 @@
           <td><%= score.rate_score %></td>
           <td>
             <% if current_user.isadmin? %>
-              <%= link_to t("score.edits"), edit_admin_score_path(score) %>
-              <%= link_to t("score.delete"), admin_score_path(score),
+              <%= link_to t("score.edits"), edit_admin_score_path(score), class: "btn btn-default" %>
+              <%= link_to t("score.delete"), admin_score_path(score), class: "btn btn-danger",
                 method: :delete, data: {confirm: t("score.sure")} %>
             <% end %>
           </td>

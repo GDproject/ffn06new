@@ -1,19 +1,32 @@
-<%= link_to t("player.new"), new_admin_player_path %>
+<div class="row" style="margin-bottom:20px; margin-top:20px; float:right;">
+  <%= link_to t("player.new"), new_admin_player_path, class: "btn btn-sm btn-primary btn-create" %>
+</div>
 <div class="row">
-  <% @players.each do |player| %>
-    <div class="col-sm-2">
-      <p>
-        <%= link_to player.player_name, admin_player_path(player) %>
-        <% if current_user.isadmin? %>
-          <%=link_to t("player.edits"), edit_admin_player_path(player)%>
-          <%= link_to t("player.delete"), admin_player_path(player), method: :delete,
+
+
+    <table class="table table-striped table-bordered table-list">
+
+      <thead>
+        <tr>
+            <th class="hidden-xs" style="width:60%">Name</th>
+            <th><em class="fa fa-cog">Function</em></th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% @players.each do |player| %>
+              <tr>
+                <td class="hidden-xs"><%= link_to player.player_name, admin_player_path(player) %></td>
+
+                <td align="center">
+                  <%=link_to t("player.edits"), edit_admin_player_path(player), class: "btn btn-default" %>
+                  <%= link_to t("player.delete"), admin_player_path(player), method: :delete, class: "btn btn-danger",
             data: {confirm: t("player.sure")} %>
-        <% end %>
-      </p>
-      <p>
-        <%= image_tag player.image.url if player.image? %>
-      </p>
-    </div>
-  <% end %>
+                </td>
+              </tr>
+               <% end %>
+            </tbody>
+    </table>
+
   <%= will_paginate @players %>
 </div>

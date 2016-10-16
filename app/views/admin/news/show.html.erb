@@ -1,18 +1,30 @@
-<div class="col-md-6 content-left single-post">
-  <div class="blog-posts">
-    <h1 class="post"><%= @news.title %></h1>
-      <% if current_user.isadmin? %>
-        <%= link_to t("news.edits"), edit_admin_news_path%>
-        <%= link_to t("news.delete"), admin_news_path, method: :delete,
-          data: {confirm: t("news.sure")} %>
-      <% end %>
+<hr>
+<div class="col-md-12" >
+  <table>
+    <tr>
+      <td><%= image_tag @news.image.url if @news.image? %></td>
+      <td><span class="post"><%= @news.title %></span></td>
+      <td>
+          <div style="text-align:center;">
+          <%= t "news.created_at" %>
+            <%= @news.created_at %><br>
+      </td>
+      <td>
+          <span class="artext"><%= @news.body %></span>
+      </td>
+      <td>
+          <% if current_user.isadmin? %>
+              <%= link_to t("news.edits"), edit_admin_news_path , class: "btn btn-default" %>
+      </td>
+      <td>
+          <%= link_to t("news.delete"), admin_news_path,  class: "btn btn-danger", method: :delete,
+                    data: {confirm: t("news.sure")} %>
+                <% end %>
+      </td>
+    </tr>
+  </table>
 
-      <%= t "news.created_at" %><%= @news.created_at %>
-    <div class="last-article">
-      <%= image_tag @news.image.url if @news.image? %>
-      <p class="artext"><%= @news.body %></p>
-    </div>
-  </div>
+
+
 </div>
-<div class="clearfix"></div>
-
+ <div class="clearfix"></div>

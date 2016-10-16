@@ -28,9 +28,9 @@ en:
   index:
     title: "This is the title of index page"
   users:
-    success: "Signup success"
+    success: "Sign up success"
     not_found: "cannot found users"
-    singup: "Sign Up"
+    signup: "Sign Up"
     create: "Create my Account"
     pleaselogin: "Please login"
     deleted: "User Deleted"

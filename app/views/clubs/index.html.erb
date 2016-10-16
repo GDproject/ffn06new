@@ -1,11 +1,26 @@
+<hr>
 <div class="row">
-  <% @clubs.each do |club| %>
-    <div class="col-sm-3 col-md-4">
-      <%= link_to club_path(club) do %>
-        <%= image_tag club.image.url if club.image? %>
-      <% end %>
-      <%= link_to club.club_name, club_path(club) %>
-    </div>
-  <% end %>
-  <%= will_paginate @clubs %>
+  <table class="table table-striped table-bordered table-list" style="width:600px; margin-left:300px; ">
+
+      <thead>
+        <tr>
+            <th></th>
+            <th class="hidden-xs" style="width:50%; text-align: center;">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @clubs.each do |club| %>
+              <tr>
+                <td>
+                  <%= link_to club_path(club) do %>
+                    <%= image_tag club.image.url if club.image? %>
+                  <% end %>
+                </td>
+                <td class="hidden-xs" style="width:50%; text-align: center;" ><%= link_to club.club_name, club_path(club) %></td>
+               <% end %>
+            </tbody>
+    </table>
+    <%= will_paginate @clubs %>
+
+
 </div>

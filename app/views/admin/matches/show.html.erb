@@ -10,6 +10,7 @@
           <th><%= t"match.home_rate" %></th>
           <th><%= t"match.away_rate" %></th>
           <th></th>
+          <th colspan="2"></th>
         </tr>
       </thead>
       <tbody>
@@ -25,9 +26,9 @@
           <td><%= @match.rate.away_rate %></td>
           <td><%= @match.rate.category_match_rate.category_rates %></td>
           <% if current_user.isadmin? %>
-            <td><%= link_to t("match.edits"), edit_admin_match_path(@match) %>
+            <td><%= link_to t("match.edits"), edit_admin_match_path(@match), class: "btn btn-default" %>
             </td>
-            <td><%= link_to t("match.delete"), admin_match_path(@match), method: :delete, data: {confirm: t("club.sure")} %></td>
+            <td><%= link_to t("match.delete"), admin_match_path(@match), class: "btn btn-danger", method: :delete, data: {confirm: t("club.sure")} %></td>
           <% end %>
         </tr>
       </tbody>

@@ -1,14 +1,30 @@
-<%= link_to t("rate.new"), new_admin_rate_path %>
+
+<div class="row" style="margin-bottom:20px; margin-top:20px; float:right;">
+  <%= link_to t("rate.new"), new_admin_rate_path, class: "btn btn-sm btn-primary btn-create" %>
+</div>
 <div class="row">
-  <% @rates.each do |rate| %>
-    <div class="col-sm-3 col-md-4">
-      <%= link_to rate.home_rate, admin_rate_path(rate) %>
-      <%= link_to rate.away_rate, admin_rate_path(rate) %>
-      <% if current_user.isadmin? %>
-        <%= link_to t("rate.delete"), admin_rate_path(rate), method: :delete,
-          data: {confirm: t("rate.sure")} %>
-      <% end %>
-    </div>
-  <% end %>
+    <table class="table table-striped table-bordered table-list">
+      <thead>
+        <tr>
+            <th class="hidden-xs" style="width:30%"></th>
+            <th style="width:30%"></th>
+            <th><em class="fa fa-cog">Function</em></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @rates.each do |rate| %>
+              <tr>
+                <td><%= link_to rate.home_rate, admin_rate_path(rate) %></td>
+                <td><%= link_to rate.away_rate, admin_rate_path(rate) %></td>
+                <td align="center">
+                  <% if current_user.isadmin? %>
+                    <%= link_to t("rate.delete"), admin_rate_path(rate),  class: "btn btn-danger", method: :delete,
+                      data: {confirm: t("rate.sure")} %>
+                  <% end %>
+                </td>
+              </tr>
+               <% end %>
+            </tbody>
+    </table>
   <%= will_paginate @rate %>
 </div>

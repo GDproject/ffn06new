@@ -1,8 +1,21 @@
+<hr>
 <div class="row">
-  <% @category_news.each do |category| %>
-    <div class="col-sm-3 col-md-4">
-      <%= link_to category.category_name, category_news_path(category) %>
-    </div>
-  <% end %>
-  <%= will_paginate @category_news %>
+  <table class="table table-striped table-bordered table-list" style="width:600px; margin-left:330px; " >
+
+      <thead>
+        <tr>
+            <th class="hidden-xs" style="width:50%; text-align: center;">Category</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @category_news.each do |category| %>
+              <tr>
+                <td class="hidden-xs" style="width:50%; text-align: center;" ><%= link_to category.category_name, category_news_path(category) %></td>
+               <% end %>
+            </tbody>
+    </table>
+   <div style="margin-left: 500px;" >
+    <%= will_paginate @category_news %>
+  </div>
+
 </div>

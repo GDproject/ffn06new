@@ -1,14 +1,33 @@
-<div class="row">
-  <% @news.each do |news| %>
-    <div class="col-sm-2">
-      <p>
-        <%= image_tag news.image.url if news.image? %>
-        <%= link_to news.title, news_path(news) %>
-      </p>
-      <p>
 
-      </p>
+
+ <div class="container">
+  <hr>
+    <!-- Begin of rows -->
+  <% @news.each do |news| %>
+    <div class="row carousel-row">
+        <div class="col-xs-8 col-xs-offset-2 slide-row">
+            <div id="carousel-1" class="carousel slide slide-carousel" data-ride="carousel">
+              <!-- Indicators -->
+
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner">
+                <div class="item active">
+                    <%= image_tag news.image.url  %>
+                </div>
+              </div>
+            </div>
+            <div class="slide-content">
+                <h4><%= link_to news.title, news_path(news) %></h4>
+            </div>
+            <div class="slide-footer">
+                <span class="pull-right buttons">
+                    <%= link_to "Show", news_path(news) , class: "btn btn-sm btn-primary" %>
+            </div>
+        </div>
     </div>
   <% end %>
+  <div style="margin-left: 400px;" >
   <%= will_paginate @news %>
+</div>
 </div>

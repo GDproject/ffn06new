@@ -1,14 +1,31 @@
-<%= link_to t("category_news.new"), new_admin_category_news_path %>
+
+
+<div class="row" style="margin-bottom:20px; margin-top:20px; float:right;">
+  <%= link_to t("category_news.new"), new_admin_category_news_path, class: "btn btn-sm btn-primary btn-create" %>
+</div>
 <div class="row">
-  <% @category_news.each do |category| %>
-    <div class="col-sm-3 col-md-4">
-      <%= link_to category.category_name, admin_category_news_path(category) %>
-      <% if current_user.isadmin? %>
-        <%= link_to t("category_news.edits"), edit_admin_category_news_path(category)%>
-        <%= link_to t("category_news.delete"), admin_category_news_path(category),
-          method: :delete, data: {confirm: t("category_news.sure")} %>
-      <% end %>
-    </div>
-  <% end %>
+
+    <table class="table table-striped table-bordered table-list">
+      <thead>
+        <tr>
+            <th class="hidden-xs" style="width:60%"></th>
+            <th><em class="fa fa-cog">Function</em></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @category_news.each do |category| %>
+              <tr>
+                <td><%= link_to category.category_name, admin_category_news_path(category) %></td>
+                <td align="center">
+                  <% if current_user.isadmin? %>
+                    <%= link_to t("category_news.edits"), edit_admin_category_news_path(category), class: "btn btn-default" %>
+                    <%= link_to t("category_news.delete"), admin_category_news_path(category), class: "btn btn-danger",
+                      method: :delete, data: {confirm: t("category_news.sure")} %>
+                  <% end %>
+                </td>
+              </tr>
+               <% end %>
+            </tbody>
+    </table>
   <%= will_paginate @category_news %>
 </div>
