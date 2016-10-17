@@ -12,6 +12,9 @@
         <%= f.text_field :away_coin %>
       </div>
       <div class="form-group">
+        <%= f.hidden_field :bet_status, :value => "1" %>
+      </div>
+      <div class="form-group">
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
       </div>
       <div class="form-group">

@@ -208,3 +208,8 @@ en:
     list_bet: "List bets"
     your_coin: "Your coin "
     bets: "BETS"
+    check_coin: "You do not have enough money in your account"
+    deleted: "Deleted match"
+    delete_fail: "Delete fail"
+    delete: "Delete"
+    sure: "Are you sure ?"

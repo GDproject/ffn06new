@@ -4,10 +4,12 @@ class BetsController < ApplicationController
   before_action :load_score, except: [:index, :show]
 
   def index
-    @bets = current_user.bets
+    @bets = current_user.bets.asc_by_created_at.paginate page: params[:page],
+      per_page: Settings.per_page
   end
 
   def show
+    update_coin
   end
 
   def new
@@ -34,6 +36,16 @@ class BetsController < ApplicationController
   end
 
   def destroy
+    if @bet.destroy
+      flash.now[:success] = t "bet.deleted"
+      @coin_bet = @bet.home_coin + @bet.away_coin
+      @coin = @coin_bet + @bet.user.coin
+      @bet.user.update_columns(coin: @coin)
+      redirect_to bets_path
+    else
+      flash.now[:warning] = t "bet.delete_fail"
+      redirect_to bets_path
+    end
   end
 
   private
@@ -56,6 +68,16 @@ class BetsController < ApplicationController
 
   def load_score
     @scores = Score.all
+  end
+
+  def update_coin
+    @coin_bets = @bet.home_coin + @bet.away_coin
+    @coin = @bet.user.coin - @coin_bets
+    @bet.user.update_columns(coin: @coin)
+  end
+
+  def match_result
+
   end
 
 end

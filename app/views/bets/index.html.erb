@@ -7,7 +7,7 @@
       <th><%= t"bet.home_coin" %></th>
       <th><%= t"bet.away_coin" %></th>
       <th><%= t"bet.status" %></th>
-      <th><%= t"bet.result" %></th>
+      <th></th>
     </tr>
   </thead>
   <% @bets.each do |bet| %>
@@ -21,8 +21,17 @@
       <td><%= link_to bet.match.away.club_name, club_path(bet.match.away) %></td>
       <td><%= bet.home_coin %></td>
       <td><%= bet.away_coin %></td>
+      <% unless bet.match.match_status? %>
+        <% bet.update_columns(bet_status: 0) %>
+      <% end %>
       <td><%= bet.bet_status? ? t("bet.open"): t("bet.close") %></td>
+      <td>
+        <% if bet.bet_status? %>
+          <%= link_to t("bet.delete"), bet_path(bet), class: "btn btn-danger", method: :delete, data: {confirm: t("bet.sure")} %>
+        <% end %>
+      </td>
     </tr>
   </tbody>
   <% end %>
 </table>
+<%= will_paginate @bets %>
