@@ -23,6 +23,12 @@
       <td><%= bet.away_coin %></td>
       <% unless bet.match.match_status? %>
         <% bet.update_columns(bet_status: 0) %>
+        <% if bet.match.home_goal > bet.match.away_goal %>
+          <% @result=  (bet.home_coin - bet.away_coin)*2 %>
+        <% else %>
+          <% @result = (bet.away_coin - bet.home_coin)*2 %>
+        <% end %>
+
       <% end %>
       <td><%= bet.bet_status? ? t("bet.open"): t("bet.close") %></td>
       <td>
@@ -30,6 +36,7 @@
           <%= link_to t("bet.delete"), bet_path(bet), class: "btn btn-danger", method: :delete, data: {confirm: t("bet.sure")} %>
         <% end %>
       </td>
+<td><%= @result %></td>
     </tr>
   </tbody>
   <% end %>

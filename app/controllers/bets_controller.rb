@@ -9,7 +9,7 @@ class BetsController < ApplicationController
   end
 
   def show
-    update_coin
+    update_coin_before_end_match
   end
 
   def new
@@ -70,14 +70,11 @@ class BetsController < ApplicationController
     @scores = Score.all
   end
 
-  def update_coin
-    @coin_bets = @bet.home_coin + @bet.away_coin
-    @coin = @bet.user.coin - @coin_bets
-    @bet.user.update_columns(coin: @coin)
+  def update_coin_before_end_match
+    if @bet.bet_status?
+      @coin_bets = @bet.home_coin + @bet.away_coin
+      @coin = @bet.user.coin - @coin_bets
+      @bet.user.update_columns(coin: @coin)
+    end
   end
-
-  def match_result
-
-  end
-
 end
